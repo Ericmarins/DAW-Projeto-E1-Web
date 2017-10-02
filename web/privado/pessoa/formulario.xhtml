@@ -8,6 +8,7 @@
     <ui:composition template="/templates/template.xhtml">
         <ui:define name="titulo">Edição de Pessoa</ui:define>
         <ui:define name="conteudo">
+            <div align="center">
              <h:form>
             <p:messages/>
             <p:growl/>
@@ -35,14 +36,17 @@
                 <p:outputLabel value="CPF" for="txtCPF"/>
                 <p:inputText id="txtCPF" value="#{controlePessoa.objeto.cpf}"
                              size="14" maxlength="14"/>
+                <p:outputLabel value="Telefone" for="txtTelefone"/>
                 <p:inputText id="txtTelefone" value="#{controlePessoa.objeto.telefone}"
                              size="15" maxlength="15"
                              placeholder="Obrigatório"/>
+                <p:outputLabel value="E-mail" for="txtEmail"/>
                 <p:inputText id="txtEmail" value="#{controlePessoa.objeto.email}"
                              size="40" maxlength="40"
                              placeholder="Obrigatório"/>
             </p:panelGrid>
         </h:form>
+        </div>
         </ui:define>
     </ui:composition>
 </html>

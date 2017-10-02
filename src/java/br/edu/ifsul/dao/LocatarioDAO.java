@@ -6,7 +6,7 @@
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.jpa.EntityManagerUtil;
-import br.edu.ifsul.modelo.Pessoa;
+import br.edu.ifsul.modelo.Locatario;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import java.util.List;
@@ -16,19 +16,19 @@ import javax.persistence.EntityManager;
  *
  * @author eric_
  */
-public class PessoaDAO implements Serializable{
+public class LocatarioDAO implements Serializable{
     private String mensagem = "";
     private EntityManager em;
     
-    public PessoaDAO(){
+    public LocatarioDAO(){
         em = EntityManagerUtil.getEntityManager();
     }
 
-    public List<Pessoa> getLista(){
-        return em.createQuery("from Pessoa order by nome").getResultList();
+    public List<Locatario> getLista(){
+        return em.createQuery("from Locatario order by nome").getResultList();
     }
     
-    public boolean salvar(Pessoa obj){
+    public boolean salvar(Locatario obj){
         try {
             em.getTransaction().begin();
             if (obj.getId() == null){
@@ -50,7 +50,7 @@ public class PessoaDAO implements Serializable{
         }
     }
     
-    public boolean remover(Pessoa obj){
+    public boolean remover(Locatario obj){
         try {
             em.getTransaction().begin();
             em.remove(obj);
@@ -68,8 +68,8 @@ public class PessoaDAO implements Serializable{
         }
     }  
     
-    public Pessoa localizar(Integer id){
-        return em.find(Pessoa.class, id);
+    public Locatario localizar(Integer id){
+        return em.find(Locatario.class, id);
     }
     
     public String getMensagem() {

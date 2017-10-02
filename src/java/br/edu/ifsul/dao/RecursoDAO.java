@@ -25,7 +25,7 @@ public class RecursoDAO implements Serializable{
     }
     
      public List<Recurso> getLista(){
-        return getEm().createQuery("from Recurso order by nome").getResultList();
+        return getEm().createQuery("from Recurso order by descricao").getResultList();
     }
     
     public boolean salvar(Recurso obj){

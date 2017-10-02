@@ -4,15 +4,15 @@ import br.edu.ifsul.dao.RecursoDAO;
 import br.edu.ifsul.modelo.Recurso;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author eric_
  */
 @ManagedBean(name = "controleRecurso")
-@SessionScoped
+@ApplicationScoped
 public class ControleRecurso implements Serializable {
     
     private RecursoDAO dao;

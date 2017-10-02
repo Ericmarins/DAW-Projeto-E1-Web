@@ -5,15 +5,15 @@ import br.edu.ifsul.dao.CondominioDAO;
 import br.edu.ifsul.modelo.Condominio;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author eric_
  */
 @ManagedBean(name = "controleCondominio")
-@SessionScoped
+@ApplicationScoped
 public class ControleCondominio implements Serializable {
     
     private CondominioDAO dao;

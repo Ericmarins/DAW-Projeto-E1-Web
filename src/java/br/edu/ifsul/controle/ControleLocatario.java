@@ -5,8 +5,8 @@
  */
 package br.edu.ifsul.controle;
 
-import br.edu.ifsul.dao.PessoaDAO;
-import br.edu.ifsul.modelo.Pessoa;
+import br.edu.ifsul.dao.LocatarioDAO;
+import br.edu.ifsul.modelo.Locatario;
 import br.edu.ifsul.util.Util;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -17,16 +17,16 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean
 @ApplicationScoped
-public class ControlePessoa {
-    private PessoaDAO dao;
-    private Pessoa objeto;
+public class ControleLocatario {
+    private LocatarioDAO dao;
+    private Locatario objeto;
     
-    public ControlePessoa(){
-        dao= new PessoaDAO();
+    public ControleLocatario(){
+        dao= new LocatarioDAO();
     }
     
     public String listar(){
-        return "/privado/pessoa/listar?faces-redirect=true";
+        return "/privado/locatario/listar?faces-redirect=true";
     }
     
     public String inicio(){
@@ -34,7 +34,7 @@ public class ControlePessoa {
     }
     
     public String novo(){
-        setObjeto(new Pessoa());
+        setObjeto(new Locatario());
         return "formulario?faces-redirect=true";
     }
     
@@ -66,19 +66,19 @@ public class ControlePessoa {
         }
     }
 
-    public PessoaDAO getDao() {
+    public LocatarioDAO getDao() {
         return dao;
     }
 
-    public void setDao(PessoaDAO dao) {
+    public void setDao(LocatarioDAO dao) {
         this.dao = dao;
     }
 
-    public Pessoa getObjeto() {
+    public Locatario getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(Pessoa objeto) {
+    public void setObjeto(Locatario objeto) {
         this.objeto = objeto;
     }
 }

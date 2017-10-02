@@ -47,11 +47,10 @@
                              placeholder="Obrigatório"/>
                 <p:outputLabel value="Recursos" for="selectRecurso"/>
                 <p:selectCheckboxMenu id="selectRecurso" value="#{controleCondominio.objeto.recursos}" label="Recursos: ">
-                    <f:converter converterId="ConverterRecurso"/>
-                    <f:selectItem noSelectionOption="true" itemLabel="Selecione os recursos"/>
+                    <f:converter converterId="converterRecurso"/>
                     <f:selectItems value="#{controleCondominio.daoRecurso.lista}" var="m"
                                    itemLabel="#{m.descricao}"/>
-                </p:selectCheckboxMenu>>
+                </p:selectCheckboxMenu>
             </p:panelGrid>
             </h:form>
             </div>

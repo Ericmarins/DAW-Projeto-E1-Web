@@ -5,14 +5,14 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition template="/templates/template.xhtml">
-        <ui:define name="titulo">Listagem de Pessoas</ui:define>
+        <ui:define name="titulo">Listagem de Locatários</ui:define>
         <ui:define name="conteudo">
             <h:form>
                 <p:messages/>
                 <p:growl/>
-                <p:commandButton value="Novo" action="#{controlePessoa.novo()}"
+                <p:commandButton value="Novo" action="#{controleLocatario.novo()}"
                                  ajax="false" icon="ui-icon-plus"/>
-                <p:dataTable value="#{controlePessoa.dao.lista}" var="obj">
+                <p:dataTable value="#{controleLocatario.dao.lista}" var="obj">
                     <p:column headerText="ID">
                         <p:outputLabel value="#{obj.id}"/>
                     </p:column>
@@ -28,11 +28,20 @@
                     <p:column headerText="E-mail">
                         <p:outputLabel value="#{obj.email}"/>
                     </p:column> 
+                    <p:column headerText="renda">
+                        <p:outputLabel value="#{obj.renda}"/>
+                    </p:column> 
+                    <p:column headerText="Local Trabalho">
+                        <p:outputLabel value="#{obj.localTrabalho}"/>
+                    </p:column> 
+                    <p:column headerText="Telefone Trabalho">
+                        <p:outputLabel value="#{obj.telefoneTrabalho}"/>
+                    </p:column> 
                     <p:column headerText="Ações">
                         <div align="center">
-                            <p:commandButton action="#{controlePessoa.editar(obj.id)}"
+                            <p:commandButton action="#{controleLocatario.editar(obj.id)}"
                                              icon="ui-icon-pencil" ajax="false" title="Editar"/>
-                            <p:commandButton action="#{controlePessoa.remover(obj.id)}"
+                            <p:commandButton action="#{controleLocatario.remover(obj.id)}"
                                              icon="ui-icon-trash" title="Remover"
                                              process="@form" update="@form"
                                              onclick="if (!confirm('Confirma a exclusão?')) return false"/>
