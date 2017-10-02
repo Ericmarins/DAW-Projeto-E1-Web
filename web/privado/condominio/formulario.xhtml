@@ -45,12 +45,12 @@
                 <p:inputText id="txtCep" value="#{controleCondominio.objeto.cep}"
                              size="10" maxlength="9"
                              placeholder="Obrigatório"/>
-                <p:outputLabel value="Recursos" for="selectRecurso"/>
-                <p:selectCheckboxMenu id="selectRecurso" value="#{controleCondominio.objeto.recursos}" label="Recursos: ">
+                <!--<p:outputLabel value="Recursos" for="selectRecurso"/>
+                <p:selectCheckboxMenu id="selectRecurso" value="#{controleCondominio.objeto.recursos}" label="Selecione um:">
                     <f:converter converterId="converterRecurso"/>
                     <f:selectItems value="#{controleCondominio.daoRecurso.lista}" var="m"
                                    itemLabel="#{m.descricao}"/>
-                </p:selectCheckboxMenu>
+                </p:selectCheckboxMenu>-->
             </p:panelGrid>
             </h:form>
             </div>
