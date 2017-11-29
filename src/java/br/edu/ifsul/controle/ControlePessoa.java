@@ -33,36 +33,42 @@ public class ControlePessoa {
         return "/index?faces-redirect=true";
     }
     
-    public String novo(){
+    public void novo(){
         setObjeto(new Pessoa());
-        return "formulario?faces-redirect=true";
-    }
-    
-    public String salvar(){
-        if (getDao().salvar(getObjeto())){
-            Util.mensagemInformacao(getDao().getMensagem());
-            return "listar?faces-redirect=true";
-        } else {
-            Util.mensagemErro(getDao().getMensagem());
-            return "formulario?faces-redirect=true";
-        }
     }
     
     public String cancelar(){
         return "listar?faces-redirect=true";
     }
     
-    public String editar(Integer id){
-        setObjeto(getDao().localizar(id));
-        return "formulario?faces-redirect=true";
+    public void salvar() {
+        try {
+            if (objeto.getId() == null) {
+                dao.persist(objeto);
+            } else {
+                dao.merge(objeto);
+            }
+            Util.mensagemInformacao("Objeto persistido com sucesso");
+        } catch (Exception e) {
+            Util.mensagemErro("Erro ao persistir: " + e.getMessage());
+        }
     }
-    
-    public void remover(Integer id){
-        setObjeto(getDao().localizar(id));
-        if (getDao().remover(getObjeto())){
-            Util.mensagemInformacao(getDao().getMensagem());
-        } else {
-            Util.mensagemErro(getDao().getMensagem());
+
+    public void editar(Integer id) {
+        try {
+            objeto = (Pessoa) dao.localizar(id);
+        } catch (Exception e) {
+            Util.mensagemErro("Erro ao recuperar obejto: " + e.getMessage());
+        }
+    }
+
+    public void remover(Integer id) {
+        try {
+            objeto = (Pessoa) dao.localizar(id);
+            dao.remover(objeto);
+            Util.mensagemInformacao("Objeto removido com sucesso!");
+        } catch (Exception e) {
+            Util.mensagemErro("Erro a remover objeto: " + e.getMessage());
         }
     }
 

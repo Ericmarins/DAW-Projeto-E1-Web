@@ -3,16 +3,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/templates/template.xhtml">
         <ui:define name="titulo">Listagem de Pessoas</ui:define>
         <ui:define name="conteudo">
-            <h:form>
+            <h:form id="formListagem">
                 <p:messages/>
                 <p:growl/>
-                <p:commandButton value="Novo" action="#{controlePessoa.novo()}"
-                                 ajax="false" icon="ui-icon-plus"/>
-                <p:dataTable value="#{controlePessoa.dao.lista}" var="obj">
+                <p:commandButton value="Novo" 
+                                 actionListener="#{controlePessoa.novo()}"
+                                 icon="ui-icon-plus"
+                                 process="@this" update=":formEdicao"
+                                 oncomplete="PF('dlg').show();"/>
+                <div align="center">
+                    <p:panelGrid columns="11">
+                        <p:outputLabel value="Ordem: "/>
+                        <p:selectOneMenu value="#{controlePessoa.dao.ordem}">
+                            <f:selectItem itemLabel="ID" itemValue="id"/>
+                            <f:selectItem itemLabel="Nome" itemValue="nome"/>
+                            <f:selectItem itemLabel="CPF" itemValue="cpf"/>
+                            <p:ajax update="listagem" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Filtro: "/>
+                        <p:inputText value="#{controlePessoa.dao.filtro}" size="20">
+                            <p:ajax update="listagem" event="blur"/>
+                        </p:inputText>
+                        <p:commandButton value="Filtrar" icon="ui-icon-search"
+                                         update="listagem"/>
+                        <p:outputLabel value="Máximo de objetos: "/>
+                        <p:inputNumber value="#{controlePessoa.dao.maximoObjetos}" size="5"
+                                       decimalPlaces="0" decimalSeparator=""
+                                       thousandSeparator=""/>                    
+                        <p:commandButton actionListener="#{controlePessoa.dao.primeiro()}"
+                                         update="listagem" icon="ui-icon-seek-first"/>
+                        <p:commandButton actionListener="#{controlePessoa.dao.anterior()}"
+                                         update="listagem" icon="ui-icon-seek-prev"/>   
+                        <p:commandButton actionListener="#{controlePessoa.dao.proximo()}"
+                                         update="listagem" icon="ui-icon-seek-next"/>   
+                        <p:commandButton actionListener="#{controlePessoa.dao.ultimo()}"
+                                         update="listagem" icon="ui-icon-seek-end"/>                       
+                    </p:panelGrid>
+                </div>
+                <p:dataTable
+                    value="#{controlePessoa.dao.listaObjetos}" var="obj"
+                    id="listagem">
+                    <f:facet name="footer">
+                        <p:outputLabel value="#{controlePessoa.dao.mensagemNavegacao}"/>
+                    </f:facet>
+
+                    <!-- o valor do atributo value deve apontar para uma lista -->
                     <p:column headerText="ID">
                         <p:outputLabel value="#{obj.id}"/>
                     </p:column>
@@ -21,26 +61,67 @@
                     </p:column>
                     <p:column headerText="CPF">
                         <p:outputLabel value="#{obj.cpf}"/>
-                    </p:column>
+                    </p:column>   
                     <p:column headerText="Telefone">
                         <p:outputLabel value="#{obj.telefone}"/>
-                    </p:column> 
-                    <p:column headerText="E-mail">
+                    </p:column>  
+                    <p:column headerText="Email">
                         <p:outputLabel value="#{obj.email}"/>
-                    </p:column> 
+                    </p:column>
+                    
                     <p:column headerText="Ações">
                         <div align="center">
-                            <p:commandButton action="#{controlePessoa.editar(obj.id)}"
-                                             icon="ui-icon-pencil" ajax="false" title="Editar"/>
+                            <p:commandButton actionListener="#{controlePessoa.editar(obj.id)}"
+                                             icon="ui-icon-pencil" title="Editar"
+                                             update=":formEdicao" process="@this"
+                                             oncomplete="PF('dlg').show();"/>
                             <p:commandButton action="#{controlePessoa.remover(obj.id)}"
                                              icon="ui-icon-trash" title="Remover"
                                              process="@form" update="@form"
-                                             onclick="if (!confirm('Confirma a exclusão?')) return false"/>
+                                             onclick="if (!confirm('Confirma a exclusão?'))
+                                                         return false"/>
                         </div>
                     </p:column>
                 </p:dataTable>
             </h:form>
         </ui:define>
-    </ui:composition>
+        <ui:define name="dialogos">
+            <p:dialog header="Edição de Pessoa" widgetVar="dlg"
+                      resizable="false" modal="true" width="550" height="480">
+                <h:form id="formEdicao">
+                    <p:growl id="growl"/>
+                    <p:tabView id="tab">
+                        <p:tab title="Dados principais">
+                            <div align="center">
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="ID"/>
+                                    <p:inputText value="#{controlePessoa.objeto.id}" size="5" readonly="true"/>
+                                    <p:outputLabel value="Nome" for="txtNome"/>
+                                    <p:inputText id="txtNome" value="#{controlePessoa.objeto.nome}"
+                                                 size="50" maxlength="50" placeholder="Obrigatório"/>
+                                    <p:outputLabel value="CPF" for="txtCpf"/>
+                                    <p:inputMask id="txtCpf" value="#{controlePessoa.objeto.cpf}"
+                                                 mask="999.999.999-99" size="14"/>    
+                                    <p:outputLabel value="Telefone" for="txtTelefone"/>
+                                    <p:inputText id="txtTelefone" value="#{controlePessoa.objeto.telefone}"
+                                                 size="20" maxlength="13" placeholder="Obrigatório"/>  
+                                    <p:outputLabel value="Email" for="txtEmail"/>
+                                    <p:inputText id="txtEmail" value="#{controlePessoa.objeto.email}"
+                                                 size="30" maxlength="30"/>
+                                </p:panelGrid>
+                            </div>
+                        </p:tab>                                                        
+                    </p:tabView>
+                    <p:panel>
+                        <div align="center">
+                            <p:commandButton actionListener="#{controlePessoa.salvar()}"
+                                             update=":formListagem formEdicao"
+                                             value="Salvar" icon="ui-icon-disk"
+                                             oncomplete="if (!args.validationFailed){PF('dlg').hide();}"/>
+                        </div>                        
+                    </p:panel>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>    
 </html>
-

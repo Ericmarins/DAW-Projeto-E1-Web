@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioCondominio" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1794c13f-7bb5-4ae6-837b-eda291d0970a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dadosCondominios"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="endereco" class="java.lang.String">
+		<fieldDescription><![CDATA[endereco]]></fieldDescription>
+	</field>
+	<field name="numero" class="java.lang.String">
+		<fieldDescription><![CDATA[numero]]></fieldDescription>
+	</field>
+	<field name="unidades" class="java.util.List">
+		<fieldDescription><![CDATA[unidades]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="recursos" class="java.util.List">
+		<fieldDescription><![CDATA[recursos]]></fieldDescription>
+	</field>
+	<field name="cep" class="java.lang.String">
+		<fieldDescription><![CDATA[cep]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="79" uuid="5d682600-6f2a-4ea2-869e-5ba35ef0de8e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79" uuid="357564aa-aa5d-40a3-b600-5b31bb24f830"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Relátorio de Condomínio]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="150" splitType="Stretch">
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="-10" width="555" height="160" uuid="66f9fa86-a9a5-4786-9e27-b67666e314f5"/>
+			</rectangle>
+			<textField>
+				<reportElement x="80" y="0" width="420" height="30" uuid="2ba0e6fb-ee35-46a0-b89b-dda28cd71192"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="0" width="60" height="30" uuid="24076a59-a971-4dcf-b9c5-bb338b30cc8c"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="30" width="420" height="30" uuid="96c1484f-afb6-410a-b613-bc6057406c87"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="30" width="60" height="30" uuid="619a0828-f9f8-4240-9c76-830c6d5b67e6"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="60" width="120" height="30" uuid="18a84c4c-0700-477f-9444-b8acf67dd3f6"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="60" width="60" height="30" uuid="93eccb9f-a8f5-47b5-a84a-2a4a6e69b38f"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Número:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="280" y="60" width="140" height="30" uuid="11777dbf-bdba-4124-8946-61430fbbf8b9"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cep}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="240" y="60" width="40" height="30" uuid="1c91cd82-922c-435e-b3a7-d4b899e6606c"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[CEP:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="10" y="110" width="534" height="30" uuid="9036e113-c2ec-4c82-90da-9cf0913deff8"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(
+	(java.util.List<br.edu.ifsul.modelo.UnidadeCondominial>) $F{unidades}
+)]]></dataSourceExpression>
+				<subreportExpression><![CDATA["subUnidades.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="20" width="100" height="30" uuid="3b4338c8-e469-42d6-a828-f3c779c5988a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="20" width="100" height="30" uuid="6d0c3dea-9d82-4a85-a0d8-26ca5d63c9ea"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="455" y="20" width="100" height="30" uuid="1e983430-0cfe-4c3c-9aa2-4489e250b650"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

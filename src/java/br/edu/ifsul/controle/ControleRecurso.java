@@ -30,36 +30,42 @@ public class ControleRecurso implements Serializable {
         return "/index?faces-redirect=true";
     }
     
-    public String novo(){
+    public void novo(){
         objeto = new Recurso();
-        return "formulario?faces-redirect=true";
-    }
-    
-    public String salvar(){
-        if (dao.salvar(objeto)){
-            Util.mensagemInformacao(dao.getMensagem());
-            return "listar?faces-redirect=true";
-        } else {
-            Util.mensagemErro(dao.getMensagem());
-            return "formulario?faces-redirect=true";
-        }
     }
     
     public String cancelar(){
         return "listar?faces-redirect=true";
     }
     
-    public String editar(Integer id){
-        objeto = dao.localizar(id);
-        return "formulario?faces-redirect=true";
+    public void salvar() {
+        try {
+            if (objeto.getId() == null) {
+                dao.persist(objeto);
+            } else {
+                dao.merge(objeto);
+            }
+            Util.mensagemInformacao("Objeto persistido com sucesso");
+        } catch (Exception e) {
+            Util.mensagemErro("Erro ao persistir: " + e.getMessage());
+        }
     }
-    
-    public void remover(Integer id){
-        objeto = dao.localizar(id);
-        if (dao.remover(objeto)){
-            Util.mensagemInformacao(dao.getMensagem());
-        } else {
-            Util.mensagemErro(dao.getMensagem());
+
+    public void editar(Integer id) {
+        try {
+            objeto = (Recurso) dao.localizar(id);
+        } catch (Exception e) {
+            Util.mensagemErro("Erro ao recuperar obejto: " + e.getMessage());
+        }
+    }
+
+    public void remover(Integer id) {
+        try {
+            objeto = (Recurso) dao.localizar(id);
+            dao.remover(objeto);
+            Util.mensagemInformacao("Objeto removido com sucesso!");
+        } catch (Exception e) {
+            Util.mensagemErro("Erro a remover objeto: " + e.getMessage());
         }
     }
     

@@ -23,7 +23,11 @@
                                     <p:menuitem action="#{controlePessoa.listar()}" ajax="false" value="Manutenção de Pessoas"/>
                                     <p:menuitem action="#{controleLocatario.listar()}" ajax="false" value="Manutenção de Locatário"/>
                                     <p:menuitem action="#{controleRecurso.listar()}" ajax="false" value="Manutenção de Recursos"/>
+                                    
+                                </p:submenu>
+                                <p:submenu label="Avançados">
                                     <p:menuitem action="#{controleCondominio.listar()}" ajax="false" value="Manutenção de Condomínios"/>
+                                    <p:menuitem action="#{controleAluguel.listar()}" ajax="false" value="Manutenção de Alugueis"/>
                                 </p:submenu>
                             </p:column>
                         </p:submenu>
