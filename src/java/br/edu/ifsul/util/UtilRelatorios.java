@@ -18,6 +18,10 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+/**
+ *
+ * @author eric_
+ */
 
 public class UtilRelatorios {
 

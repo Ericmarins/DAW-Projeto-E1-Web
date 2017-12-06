@@ -5,8 +5,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Jorge Luis Boeira Bavaresco
- * @email jorge.bavaresco@passofundo.ifsul.edu.br
+ * @author eric_
  */
 public class UnidadeCondominialDAO<T> extends DAOGenerico<UnidadeCondominial> implements Serializable {
 

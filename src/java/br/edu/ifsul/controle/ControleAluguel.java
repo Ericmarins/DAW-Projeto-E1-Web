@@ -8,9 +8,7 @@ import br.edu.ifsul.modelo.UnidadeCondominial;
 import br.edu.ifsul.modelo.Locatario;
 import br.edu.ifsul.modelo.Mensalidades;
 import br.edu.ifsul.util.Util;
-import br.edu.ifsul.util.UtilRelatorios;
 import java.io.Serializable;
-import java.util.HashMap;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 

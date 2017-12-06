@@ -7,8 +7,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Jorge Luis Boeira Bavaresco
- * @email jorge.bavaresco@passofundo.ifsul.edu.br
+ * @author eric_
  */
 
 public class AluguelDAO<T> extends DAOGenerico<Aluguel> implements Serializable {
